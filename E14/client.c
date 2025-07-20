@@ -4,7 +4,7 @@
 #include <string.h>
 #include <unistd.h>        // close()
 #include <arpa/inet.h>     // sockaddr_in, inet_pton
-#include <pthread>
+#include <pthread.h>
 
 #define PORT 12345
 #define BUFFER_SIZE 1024
@@ -48,6 +48,20 @@ int main() {
     if (bytes_received > 0) {
         buffer[bytes_received] = '\0';
         printf("📨 Risposta dal server: %s\n", buffer);
+    }
+    int continua=1;
+    while(continua){
+        printf("Digita l'azione vuoi eseguire: ADD/UPDATE/DELETE/PUT IMPORTO Bonifico/Prelievo/Deposito\n");
+        fgets(buffer, sizeof(buffer), stdin);
+        buffer[strcspn(buffer, "\n")] = 0;
+        printf("invio dati al server\n");
+        send(sockfd, buffer, strlen(buffer), 0);
+        ssize_t bytes_received = recv(sockfd, buffer, BUFFER_SIZE - 1, 0);
+        if (bytes_received > 0) {
+            buffer[bytes_received] = '\0';
+            printf("📨 Risposta dal server: %s\n", buffer);
+        continua=0;
+        }
     }
 
     // 7. Chiudi
