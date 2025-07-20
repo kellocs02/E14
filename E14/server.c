@@ -12,6 +12,8 @@
 
 //inizializziamo tutti i movimenti mettendo 0 nel campo valido
 //questo ci servirà quando faremo le operazioni sulla struttura dati condivisa
+Movimento movimenti[MAX_MOVIMENTI];
+
 void inizializza_movimenti() {
     for (int i = 0; i < MAX_MOVIMENTI; i++) {
         movimenti[i].valido = 0;  // 0 = slot libero
@@ -34,7 +36,7 @@ void* gestisci_client(void* arg) {
         buffer[bytes] = '\0';  
 
         printf(" Messaggio ricevuto: %s\n", buffer);
-
+        AnalisiStringa(buffer,client_fd);
         // Risposta semplice
         const char* risposta = "Messaggio ricevuto dal server\n";
         send(client_fd, risposta, strlen(risposta), 0);

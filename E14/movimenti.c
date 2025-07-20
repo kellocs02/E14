@@ -4,10 +4,11 @@
 #include <stdlib.h>
 #include <pthread.h>
 
-Movimento movimenti[MAX_MOVIMENTI];  // definizione reale della variabile
+
 pthread_mutex_t mutex=PTHREAD_MUTEX_INITIALIZER; //creiamo il mutex per sincronizzare l'accesso alle operazioni sulla struttura dati condivisa
 
 void ADD(char* importo, char* causale, int client_fd){
+        printf("siamo entrati nell'ADD\n");
         int importo_valore=atoi(importo); //convertiamo il numero da stringa a intero
         int aggiunto = 0;
         //mettiamo il lock sul mutex

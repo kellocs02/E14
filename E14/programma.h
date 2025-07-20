@@ -12,13 +12,14 @@ typedef struct {
 
 extern Movimento movimenti[MAX_MOVIMENTI]; 
 
-void* Add()
+void ADD(char* importo, char* causale, int client_fd);
 
-void* Delete()
+void DELETE(int id,int client_fd);
 
-void* Update()
+void UPDATE(int id, char* importo, char* causale,int client_fd);
 
-void* List()
+void LIST(int client_fd);
 
+void AnalisiStringa(char *buffer, int client_fd);
 
 #endif

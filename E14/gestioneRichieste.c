@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>     //usata per la funzione send  
-#include <pthread>
+#include <pthread.h>
 #include "programma.h"
 
 
@@ -79,13 +79,13 @@ void AnalisiStringa(char *buffer, int client_fd) {
     //ora dobbiamo qui mettere la funzione corrispondente da eseguire in base al comando
 
     if(strcmp(cmd,"ADD")==0){
-        ADD();
+        ADD(cmd,importo_str,client_fd);
     }else if(strcmp(cmd,"DELETE")==0){
-        DELETE();
+        DELETE(id,client_fd);
     }else if(strcmp(cmd,"UPDATE")==0){
-        UPDATE();
+        UPDATE(id,importo_str,causale,client_fd);
     }else{
-        LIST();
+        LIST(client_fd);
     }
 }
 
